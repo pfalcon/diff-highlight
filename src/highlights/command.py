@@ -14,6 +14,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+import errno
 import re
 import sys
 from highlights.pprint import INSERTED, DELETED, pprint_hunk
@@ -49,8 +50,16 @@ def highlight_main():
                 write(rawline)
 
         show_hunk(new, old)  # flush last hunk
-    except IOError:
-        pass
+    except IOError as e:
+        if e.args[0] == errno.EPIPE:
+            # Happens when e.g. piping to "less", and quitting it before
+            # reaching EOF. We don't print exception, but exit with
+            # non-successful result code, different from "differences
+            # found".
+            pass
+        else:
+            # Re-raise any other exception
+            raise
 
 
 def show_hunk(new, old):
