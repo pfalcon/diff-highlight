@@ -71,6 +71,14 @@ Apache License 2.0 (``highlights/pprint.py`` is under PSFL).
 History
 =======
 
+2.0
+---
+* Forked as ``diff-hilite``.
+* Don't swallow arbitrary IOError's, swallow only EPIPE which happens
+  often when using with interactive pagers like ``less``.
+* Exit with the same result codes as ``diff`` (``diff | diff-hilite`` can
+  be used as a drop-in replacement for just ``diff`` in scripts).
+
 1.2.0 (2016-02-07)
 -------------------
 * Grouping indented hunks
