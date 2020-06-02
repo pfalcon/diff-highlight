@@ -23,6 +23,7 @@ colortable = {'none': 0, 'red': 31, 'green': 32}
 
 
 def highlight_main():
+    exit_code = 0
     try:
         new, old = [], []
         in_header = True
@@ -42,8 +43,10 @@ def highlight_main():
 
             if not in_header and stripped.startswith('+'):
                 new.append(stripped)
+                exit_code = 1
             elif not in_header and stripped.startswith('-'):
                 old.append(stripped)
+                exit_code = 1
             else:
                 show_hunk(new, old)
                 new, old = [], []
@@ -56,10 +59,12 @@ def highlight_main():
             # reaching EOF. We don't print exception, but exit with
             # non-successful result code, different from "differences
             # found".
-            pass
+            exit_code = 2
         else:
             # Re-raise any other exception
             raise
+
+    sys.exit(exit_code)
 
 
 def show_hunk(new, old):
