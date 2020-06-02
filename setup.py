@@ -27,15 +27,17 @@ if sys.version_info < (3, 0):
     test_requires.append('mercurial')
 
 setup(
-    name='diff-highlight',
+    name='diff-hilite',
     version='1.2.0',
-    description='pretty diff highlighter; emphasis changed words in diff',
+    description='Diff wrapper/filter for intra-line changes highlighting',
     long_description=open("README.rst").read(),
     classifiers=classifiers,
-    keywords=['mercurial', 'git', 'diff', 'highlight'],
+    keywords=['git', 'diff', 'intra-line', 'intraline', 'highlight'],
     author='Takeshi Komiya',
     author_email='i.tkomiya at gmail.com',
-    url='https://github.com/tk0miya/diff-highlight',
+    maintainer='Paul Sokolovsky',
+    maintainer_email='pfalcon@users.sourceforge.net',
+    url='https://github.com/pfalcon/diff-hilite',
     license='Apache License 2.0',
     py_modules=['diff_highlight'],
     packages=find_packages('src'),
@@ -47,6 +49,6 @@ setup(
     tests_require=test_requires,
     entry_points="""
        [console_scripts]
-       diff-highlight = highlights.command:highlight_main
+       diff-hilite = highlights.command:highlight_main
     """
 )
