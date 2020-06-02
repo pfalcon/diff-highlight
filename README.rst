@@ -1,46 +1,54 @@
-`diff-highlight`: pretty diff highlighter; emphasis changed words in diff
+.. image:: https://travis-ci.org/pfalcon/diff-hilite.svg?branch=master
+   :target: https://travis-ci.org/pfalcon/diff-hilite
 
-diff-highlight adds word highlighting feature to git, mercurial and other diff viewers.
+.. image:: https://coveralls.io/repos/pfalcon/diff-hilite/badge.png?branch=master
+   :target: https://coveralls.io/r/pfalcon/diff-hilite?branch=master
 
-.. image:: https://travis-ci.org/tk0miya/diff-highlight.svg?branch=master
-   :target: https://travis-ci.org/tk0miya/diff-highlight
+***************************************************************
+diff-hilite - Highlight intra-line differences in "diff" output
+***************************************************************
 
-.. image:: https://coveralls.io/repos/tk0miya/diff-highlight/badge.png?branch=master
-   :target: https://coveralls.io/r/tk0miya/diff-highlight?branch=master
-
-.. image:: https://codeclimate.com/github/tk0miya/diff-highlight/badges/gpa.svg
-   :target: https://codeclimate.com/github/tk0miya/diff-highlight
+``diff-hilite`` adds intra-line differences highlighting to ``diff``,
+``git``, etc. ``diff-hilite`` is based on the excellent difflib module
+from Python standard library. The original version of the utility was
+put together by Takeshi Komiya. Last-mile patching to make it a
+drop-in replacement for ``diff`` is by Paul Sokolovsky.
 
 Features
 ========
-* Add highlights to diff output
-* mercurial extension for diff highlighting
 
-Setup
-=====
+* Adds intra-line highlighting of differences to unified diff output.
+* Serves as a (pipe) filter for output of ``diff -u`` and other tools
+  producing diff output in "unified" format.
+
+Install
+=======
 
 Use easy_install or pip::
 
-   $ sudo easy_install diff-highlight
+   $ sudo easy_install diff-hilite
 
    Or
 
-   $ sudo pip install diff-highlight
+   $ sudo pip install diff-hilite
 
 Applying to git
 ---------------
 
-Add pager settings to your $HOME/.gitconfig to enable word highlights::
+Add pager settings to your ``$HOME/.gitconfig`` to enable intra-line
+highlighting::
 
    [pager]
-       log = diff-highlight | less
-       show = diff-highlight | less
-       diff = diff-highlight | less
+       log = diff-hilite | less
+       show = diff-hilite | less
+       diff = diff-hilite | less
+
 
 Applying to mercurial
 ---------------------
 
-Add `color` and `diff_highlight` extensions to your $HOME/.hgrc to enable word highlights::
+Add ``color`` and ``diff_highlight`` extensions to your ``$HOME/.hgrc`` to
+enable intra-line highlighting::
 
    [extensions]
    color =
@@ -49,13 +57,15 @@ Add `color` and `diff_highlight` extensions to your $HOME/.hgrc to enable word h
 
 Requirements
 ============
-* Python 2.6 or 2.7, or Python 3.2, 3.3, 3.4 (or higher
-  (mercurial extension works on python 2.x only)
+
+* Python 2.6 or 2.7, or Python 3.2, 3.3, 3.4 or higher
+  (mercurial extension works on python 2.x only).
+
 
 License
 =======
-Apache License 2.0
-(`highlights/pprint.py` is under PSFL).
+
+Apache License 2.0 (``highlights/pprint.py`` is under PSFL).
 
 
 History
