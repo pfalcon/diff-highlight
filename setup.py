@@ -28,7 +28,7 @@ if sys.version_info < (3, 0):
 
 setup(
     name='diff-hilite',
-    version='1.2.0',
+    version='2.0',
     description='Diff wrapper/filter for intra-line changes highlighting',
     long_description=open("README.rst").read(),
     classifiers=classifiers,
