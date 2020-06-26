@@ -32,13 +32,13 @@ def highlight_main():
                 rawline = rawline.decode('utf-8')
 
             # strip ESC chars and CR/LF
-            stripped = re.sub('\x1b\[[0-9;]*m', '', rawline.rstrip("\r\n"))
+            stripped = re.sub(r'\x1b\[[0-9;]*m', '', rawline.rstrip("\r\n"))
 
             if in_header:
-                if re.match('^(@|commit \w+$)', stripped):
+                if re.match(r'^(@|commit \w+$)', stripped):
                     in_header = False
             else:
-                if not re.match('^(?:[ +\-@\\\\]|diff)', stripped):
+                if not re.match(r'^(?:[ +\-@\\\\]|diff)', stripped):
                     in_header = True
 
             if not in_header and stripped.startswith('+'):
