@@ -17,17 +17,25 @@
 import errno
 import re
 import sys
+import subprocess
 from highlights.pprint import INSERTED, DELETED, pprint_hunk
 
 colortable = {'none': 0, 'red': 31, 'green': 32}
 
 
 def highlight_main():
+    proc = None
+    infile = sys.stdin
     exit_code = 0
+
+    if len(sys.argv) > 1:
+        proc = subprocess.Popen(["diff"] + sys.argv[1:], stdout=subprocess.PIPE, encoding="utf-8")
+        infile = proc.stdout
+
     try:
         new, old = [], []
         in_header = True
-        for rawline in sys.stdin:
+        for rawline in infile:
             if sys.version_info < (3, 0):
                 rawline = rawline.decode('utf-8')
 
@@ -63,6 +71,13 @@ def highlight_main():
         else:
             # Re-raise any other exception
             raise
+
+    if proc:
+        if exit_code != 0:
+            proc.terminate()
+        else:
+            exit_code = proc.poll()
+            assert exit_code is not None
 
     sys.exit(exit_code)
 
